@@ -1,0 +1,20 @@
+version: '3.9'
+services:
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - 4318:4318
+      - 16686:16686
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+
+  postgres:
+    image: postgres:14-alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - ~/apps/postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=S3cret
+      - POSTGRES_USER=citizix_user
+      - POSTGRES_DB=citizix_db
